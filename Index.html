@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halo Waypoint Clone - Replica</title>
+    <title>LAYER 8 GAMES</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -112,29 +112,72 @@
             color: var(--accent-blue);
         }
 
-        /* --- HERO SECTION (Ajustada para que la imagen llegue al fondo) --- */
+        /* --- HERO SECTION --- */
         .hero-section {
-        position: relative;
-        min-height: 100vh;
-        display: flex;
-        align-items: flex-start; 
-        padding: 220px 5% 80px 5%; 
-        padding-bottom: 200px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center; /* Centrado vertical mejorado */
+            padding: 100px 5%;
+            /* Mantenemos tu corte geométrico */
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 65% 90%, 60% 100%, 40% 100%, 35% 90%, 0 90%);
+            margin-bottom: -50px;
+            overflow: hidden;
+            background-color: #000; /* Fondo negro de seguridad */
+        }
 
-        background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 100%), 
-                url("Noble_Six_City.jpg");
-        background-repeat: no-repeat;
-        background-position: center top;
+        /* La imagen de fondo con los cuadros */
+        .hero-bg {
+            position: absolute;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* IMPORTANTE: Enviamos la imagen al fondo total */
+            z-index: 1; 
+            /* Bajamos la opacidad para que los cuadros no molesten al texto */
+            opacity: 0.4; 
+            /* Opcional: un ligero desenfoque ayuda a que el texto resalte */
+            filter: brightness(0.8);
+        }
 
-        /* 👇 CONTROL TOTAL */
-        background-size: 125% 125%;
+        /* El gradiente oscuro para legibilidad */
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right,
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.6) 40%,
+                rgba(0,0,0,0) 100%);
+            /* El gradiente debe estar sobre la imagen pero bajo el texto */
+            z-index: 2; 
+        }
 
-        clip-path: polygon(0 0, 100% 0, 100% 90%, 65% 90%, 60% 100%, 40% 100%, 35% 90%, 0 90%);
-        margin-bottom: -50px; 
+        /* El contenedor del texto */
+        .hero-content {
+            position: relative;
+            /* El texto debe estar arriba de todo */
+            z-index: 3; 
+            max-width: 800px;
+        }
+
+        /* Estilos extra para que el texto se vea pro */
+        .hero-content h1 {
+            font-size: clamp(2rem, 8vw, 5rem);
+            margin: 20px 0;
+            color: #fff;
+            letter-spacing: 5px;
+        }
+
+        .hero-content p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
         
         /* --- ESTILOS DE TEXTO DEL HERO --- */
-
         .tech-detail {
             margin-bottom: 25px;
         }
@@ -172,6 +215,9 @@
 
         /* BOTÓN AMARILLO */
         .btn-primary {
+            position: relative; /* 1. OBLIGATORIO para que z-index funcione */
+            z-index: 100;      /* 2. Un número alto para que nada lo tape */
+            
             display: inline-block;
             background-color: var(--accent-yellow);
             color: #000;
@@ -179,6 +225,7 @@
             text-decoration: none;
             font-weight: 700;
             letter-spacing: 2px;
+            /* Tu corte geométrico estilo Halo */
             clip-path: polygon(5% 0, 100% 0, 100% 70%, 95% 100%, 0 100%, 0% 30%);
             transition: all 0.2s;
             margin-top: 10px;
@@ -228,6 +275,8 @@
         }
 
         .card-image img {
+            border: 2px solid var(--bg-dark); /* Borde oscuro para destacar la imagen */
+            border-radius: 4px; /* Opcional: un toque redondeado */
             width: 100%;
             height: 100%;
             min-height: 250px;
@@ -269,7 +318,8 @@
         /* Ajustes Responsivos para móviles */
         @media (max-width: 900px) {
             .hero-section {
-                padding: 120px 5% 60px 5%; /* Menos padding en móviles para que no quede tan abajo */
+                /* CORRECCIÓN: Aumentamos el padding inferior a 150px para salvar el botón */
+                padding: 120px 5% 150px 5%; 
                 min-height: auto;
                 clip-path: polygon(0 0, 100% 0, 100% 90%, 70% 90%, 65% 100%, 35% 100%, 30% 90%, 0 90%);
             }
@@ -296,7 +346,7 @@
         </button>
 
         <div class="logo">
-            <span class="logo-text">HALO WAYPOINT</span>
+            <span class="logo-text">LAYER 8 GAMES</span>
         </div>
 
         <a href="#" class="login-link">
@@ -306,60 +356,71 @@
 
     <aside class="side-menu" id="sideMenu">
         <ul class="menu-links">
-            <li><a href="#">JUEGOS</a></li>
+            <li><a href="Index.html">INICIO</a></li>
             <li><a href="#">NOTICIAS</a></li>
-            <li><a href="#">ESPORTS</a></li>
-            <li><a href="#">FOROS</a></li>
+            <li><a href="#">JUEGOS</a></li>
+            <li><a href="#">T&C</a></li>
         </ul>
     </aside>
 
     <header class="hero-section">
+        <img src="Banner1.jpeg" class="hero-bg" alt="Marine Background">
+
         <div class="hero-content">
             
             <div class="tech-detail">
-                <span>051311.01 : : 03.03.2026 : . : : . :</span>
+                <span id="current-date">: . : : . : --.--.---- : . : : . :</span>
                 <hr class="tech-line">
             </div>
             
-            <h1 class="hero-title">HALO25TOGETHER</h1>
+            <h1 class="hero-title">LAYER 8 STUDIOS</h1>
             
             <p class="hero-paragraph">
-                In 2001, we took our first steps into 2552 as the Master Chief. From that first journey in the mighty boots of humanity's greatest defender, Halo has gone on to become a cultural landmark a quarter-century in the making.
+                Somos <strong>Layer 8 Games</strong>, un studio de desarrollo de videojuegos con sede en México, fundado en 2023 por <strong>Proxell</strong>. Nuestra misión es crear experiencias de juego innovadoras y emocionantes que conecten con jugadores de todo el mundo.
             </p>
             
             <p class="hero-paragraph">
-                All year long, we're inviting everyone in our community to help ring in Halo's Silver Anniversary by sharing their favorite Halo memories and celebrating Halo's iconic legacy at a series of once-in-a-lifetime events culminating in Halo Fest, the ultimate fan expo.
+                Nos hemos enfocado en construir un equipo talentoso y apasionado, así como en desarrollar proyectos que reflejen nuestra visión creativa. Estamos comprometidos con la calidad y la innovación, y estamos emocionados por lo que el futuro nos depara.
                 <br><br>
-                Visit our Silver Anniversary Community Hub to learn more.
+                Apoyanos a crecer y ser parte de esta aventura siguiéndonos en nuestras redes sociales y visitando nuestro Community Hub para estar al tanto de todas las novedades, eventos y oportunidades de colaboración.
             </p>
             
-            <a href="#" class="btn-primary">VISIT COMMUNITY HUB</a>
+            <a href="https://discord.gg/Bv2kGfJpZ" class="btn-primary">VISITA NUESTRA COMUNIDAD</a>
         </div>
     </header>
+
+    <br>
 
     <main class="container">
         <div class="news-grid">
             
             <article class="card featured-card">
                 <div class="card-image main-img">
-                    <img src="https://wpassets.halowaypoint.com/wp-content/2026/01/vNext-MBI-Home-Hero-Mobile-Yatala-R01A.jpg" alt="MCC Update">
+                    <img src="layer8gameslogooriginal.jpeg" alt="Layer 8 Games Logo">
                 </div>
                 <div class="card-body">
-                    <span class="category">GAMES, HALO: THE MASTER CHIEF COLLECTION</span>
-                    <h2>2026 MCC EXCHANGE UPDATE AND LOG-IN UNLOCKS</h2>
-                    <span class="date">5 days ago</span>
-                    <p>MCC's Exchange is getting an upgrade! The implementation of the Exchange in MCC gave players a new way to unlock gear. Play the game, earn Spartan Points, redeem said points for sweet unlocks.</p>
+                    <span class="category">Conocenos y explora nuestra web</span>
+                    <h2>LAYER 8 GAMES Estudio de desarrollo de videojuegos</h2>
+                    <span class="date">1 days ago</span>
+                    <p>
+                        En Layer 8 Games, creemos que el código es solo el principio. Utilizando el motor Unity,
+                        forjamos mundos inmersivos y mecánicas de alta precisión diseñadas para desafiar los límites
+                        de la realidad digital. No solo desarrollamos videojuegos;
+                        creamos experiencias interactivas que permanecen en la memoria de los jugadores.
+                        Bienvenidos a la siguiente capa del entretenimiento.
+                    </p>
                 </div>
             </article>
 
             <article class="card secondary-card">
                 <div class="card-image">
-                    <img src="https://via.placeholder.com/400x200/161d24/ffffff?text=Halo+Omnibus" alt="Halo Omnibus">
+                    <img src="layer8gamecenterlogo.jpg" alt="LogoLayer8Games GAME CENTER">
                 </div>
                 <div class="card-body">
-                    <span class="category">BOOK PREVIEW, FICTION, GAMES</span>
-                    <h2>HALO: THE MASTER CHIEF OMNIBUS | COVER REVEAL</h2>
-                    <span class="date">6 days ago</span>
+                    <span class="category">NUESTROS VIDEOJUEGOS</span>
+                    <h2>LAYER8 GAME CENTER</h2>
+                    <span class="date">1 days ago</span>
+                    <a href="https://discord.gg/Bv2kGfJpZ" class="btn-primary">DESCARGA LA APP</a>
                 </div>
             </article>
 
@@ -373,6 +434,26 @@
         menuBtn.addEventListener('click', () => {
             sideMenu.classList.toggle('open');
         });
+    </script>
+
+    <script>
+        function updateTechDate() {
+            const now = new Date();
+            
+            // Obtenemos día, mes y año
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+            const year = now.getFullYear();
+
+            // Formateamos la cadena
+            const dateString = `: . : : . :${day}.${month}.${year} : . : : . :`;
+            
+            // Insertamos en el HTML
+            document.getElementById('current-date').textContent = dateString;
+        }
+
+        // Ejecutar al cargar la página
+        updateTechDate();
     </script>
 
 </body>
